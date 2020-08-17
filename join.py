@@ -2,7 +2,7 @@ from win32com.client import Dispatch
 import os
 
 xl = Dispatch("Excel.Application")
-xl.Visible = True  # You can remove this line if you don't want the Excel application to be visible
+xl.Visible = True  
 xl.DisplayAlerts = False
 xl.ScreenUpdating = False
 xl.Application.EnableEvents = False
@@ -17,7 +17,7 @@ for file in files:
     print(file)
     wb = xl.Workbooks.Open(Filename=os.path.abspath(path) + '\\' + file)
     ws = wb.Worksheets(1)
-    ws.name = file.split(' ')[0]
+    ws.name = file.split(' ')[0]  # Номер ЛСР в имени файла ГрандСмета ставит первым.
     ws.Copy(Before=result.Worksheets(1))
 
 result.SaveAs(Filename=os.path.abspath(path) + '\\ этап. Глава .xlsx')
